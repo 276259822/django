@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>注册 - 我的博客</title>
+{% endblock title %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'users/style/register.css' %}">
+{% endblock link %}
+
+{% block body %}
+<div class="register-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">注册帐号</div>
+          <div class="card-body">
+            <form>
+              {{ form.username }}
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+          </div> 
+          <div class="card-footer text-center">
+            <span>已有帐号？<a href="">登陆</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

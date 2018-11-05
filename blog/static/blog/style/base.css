@@ -1,0 +1,9 @@
+.flex-content {
+  flex: 1;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+.main-body {
+  padding-top: 56px;
+}

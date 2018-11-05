@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'blogproject.urls'
+
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {
@@ -124,3 +128,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
