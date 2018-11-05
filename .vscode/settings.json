@@ -1,0 +1,9 @@
+{
+  "python.pythonPath": "/study/python/venv/bin/python3",
+  "python.linting.pylintPath": "pylint",
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django"
+  ],
+  "python.formatting.autopep8Path": "autopep8"
+}

@@ -1,16 +1,7 @@
-{% extends "base.html" %}
-
-{% load staticfiles %}
-
-{% block title %}
+{% extends "base.html" %} {% load staticfiles %} {% block title %}
 <title>注册 - 我的博客</title>
-{% endblock title %}
-
-{% block link %}
-<link rel="stylesheet" href="{% static 'users/style/register.css' %}">
-{% endblock link %}
-
-{% block body %}
+{% endblock title %} {% block link %}
+<link rel="stylesheet" href="{% static 'users/style/register.css' %}"> {% endblock link %} {% block body %}
 <div class="register-page">
   <div class="container">
     <div class="row">
@@ -18,21 +9,26 @@
         <div class="card">
           <div class="card-header">注册帐号</div>
           <div class="card-body">
-            <form>
-              {{ form.username }}
+            <form action="{% url 'users:register' %}" method="POST">
+              {% csrf_token %} {% for field in form %}
               <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email">
+                {{ field.label_tag }} {{ field }}
+                <!-- {% if field.help_text %}
+                <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                {% endif %} -->
               </div>
-              <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
+              {% if field.errors %}
+              <div class="alert alert-danger errors-tips">
+                {{ field.errors }}
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              {% endif %} {% endfor %}
+              <button type="submit" class="btn btn-primary btn-block">注册</button>
             </form>
-          </div> 
+          </div>
           <div class="card-footer text-center">
-            <span>已有帐号？<a href="">登陆</a></span>
+            <span>已有帐号？
+              <a href="{% url 'login' %}">登陆</a>
+            </span>
           </div>
         </div>
       </div>

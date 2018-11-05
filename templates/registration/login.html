@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %}
+<title>注册 - 我的博客</title>
+{% endblock title %} {% block link %}
+<link rel="stylesheet" href="{% static 'users/style/login.css' %}"> {% endblock link %} {% block body %}
+<div class="login-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header">登录</div>
+          <div class="card-body">
+            <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %} {% if form.non_field_errors %}
+              <div class="alert alert-danger errors-tips">
+                {{ form.non_field_errors }}
+              </div>
+              {% endif %} {% for field in form %}
+              <div class="form-group">
+                {{ field.label_tag }} {{ field }}
+              </div>
+              {% if field.errors %}
+              <div class="alert alert-danger errors-tips">
+                {{ field.errors }}
+              </div>
+              {% endif %} {% endfor %}
+              <button type="submit" class="btn btn-primary btn-block">登录</button>
+            </form>
+          </div>
+          <div class="card-footer text-center flex-list">
+            <a href="#">找回密码</a>
+            <div class="flex-content"></div>
+            <span>还没帐号？
+              <a href="{% url 'users:register' %}">注册</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
