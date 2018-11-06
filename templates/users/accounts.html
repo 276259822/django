@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+<title>设置 - 我的博客</title>
+{% endblock title %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'users/style/index.css' %}">
+{% endblock link %}
+
+{% block body %}
+<div class="users-page">
+  <div class="container card accounts-page">
+    <div class="header">
+      <img src="http://static.runoob.com/images/mobile-icon.png" class="align-self-center mr-3 rounded-circle" style="width:60px">
+      <div class="media-body">
+        <div><strong>{{ user.username }}</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

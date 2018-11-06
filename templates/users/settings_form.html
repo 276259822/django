@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+<title>设置 - 我的博客</title>
+{% endblock title %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'users/style/index.css' %}">
+{% endblock link %}
+
+{% block body %}
+<div class="users-page">
+  <div class="container card settings-page">
+    <div class="row">
+      <div class="col-md-3 layout-left">
+        {% include "users/components/nav.html" %}
+      </div>
+      <div class="col-md-9 layout-right">
+        <div class="card">
+          <div class="card-header">帐号信息</div>
+          <div class="card-body">
+            <form action="{% url 'users:settings_form' %}" method="POST">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form-group">
+                {{ field.label_tag }} {{ field }}
+              </div>
+              {% if field.errors %}
+              <div class="alert alert-danger errors-tips">
+                {{ field.errors }}
+              </div>
+              {% endif %}
+              {% endfor %}
+              <button type="submit" class="btn btn-primary">提交</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

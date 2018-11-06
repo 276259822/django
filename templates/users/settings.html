@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+<title>设置 - 我的博客</title>
+{% endblock title %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'users/style/index.css' %}">
+{% endblock link %}
+
+{% block body %}
+<div class="users-page">
+  <div class="container card settings-page">
+    <div class="row">
+      <div class="col-md-3 layout-left">
+        {% include "users/components/nav.html" %}
+      </div>
+      <div class="col-md-9 layout-right">
+        <div class="right-header">
+          <strong>帐号信息</strong>
+          <button type="button" class="btn btn-link"><a href="{% url 'users:settings_form' %}">编辑</a></button> 
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">帐号：{{ user.username }}</li>
+          <li class="list-group-item">昵称：{{ user.nickname }}</li>
+          <li class="list-group-item">邮箱：{{ user.email }}</li>
+          <li class="list-group-item">注册时间：{{ user.date_joined }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

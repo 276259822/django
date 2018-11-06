@@ -1,0 +1,57 @@
+.users-page {
+  padding-top: 15px;
+}
+
+.errors-tips .errorlist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.form-group input {
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+/* settings-page */
+.settings-page {
+  background-color: #fff;
+}
+
+.settings-page .layout-left, .settings-page .layout-right {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.settings-page .layout-left {
+  border-right: 1px solid rgba(0,0,0,.125);
+}
+
+.settings-page .layout-right .right-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* accounts-page */
+.accounts-page {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.accounts-page .header {
+  display: flex;
+  align-items: center;
+}
