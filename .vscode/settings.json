@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/study/python/venv/bin/python3",
+  "python.pythonPath": "C:\\Users\\Y1\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
   "python.linting.pylintPath": "pylint",
   "python.linting.pylintArgs": [
     "--load-plugins",
