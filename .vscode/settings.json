@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "E:/python/venv/Scripts/python.exe",
+  "python.pythonPath": "/study/python/venv/bin/python3",
   "python.linting.pylintPath": "pylint",
   "python.linting.pylintArgs": [
     "--load-plugins",
