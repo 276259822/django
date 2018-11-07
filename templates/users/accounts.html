@@ -1,18 +1,34 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-{% block title %}
+{% extends "base.html" %} {% load staticfiles %} {% block title %}
 <title>设置 - 我的博客</title>
-{% endblock title %}
-
-{% block body %}
-<div class="users-page">
-  <div class="container card accounts-page">
-    <div class="header">
-      <img src="http://static.runoob.com/images/mobile-icon.png" class="align-self-center mr-3 rounded-circle" style="width:60px">
-      <div class="media-body">
-        <div><strong>{{ user.username }}</strong></div>
+{% endblock title %} {% block body %}
+<div class="users-page accounts-page">
+  <div class="container">
+    <div class="row card">
+      <div class="card-header header">
+        <img src="http://static.runoob.com/images/mobile-icon.png" class="align-self-center mr-3 rounded-circle" style="width:60px">
+        <div class="media-body">
+          <div>
+            <strong>{{ user.username }}</strong>
+          </div>
+        </div>
+        <a href="{% url 'blog:write' %}">发布文章</a>
       </div>
-      <a href="{% url 'blog:write' %}">发布文章</a>
+      <div class="card-body">
+        <h2>链接列表项</h2>
+        <ul class="list-group">
+          {% for article in article_list %}
+          <li class="list-group-item list-group-item-action flex-list">
+            <div class="flex-item">
+              <a href="">{{ article.title }}</a>
+            </div>
+            <div class="flex-content"></div>
+            <div class="flex-item">
+              <a href="{% url 'blog:edit' article.pk %}">编辑</a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %}
-<title>写文章 - 我的博客</title>
+<title>编辑文章 - 我的博客</title>
 {% endblock title %} {% block body %}
 <div class="pt15 pb15">
   <div class="container">
@@ -8,11 +8,11 @@
         {% csrf_token %}
         <div class="card-header flex-list">
           <div class="flex-item">
-            <strong>写文章</strong>
+            <strong>编辑文章</strong>
           </div>
           <div class="flex-content"></div>
           <div class="flex-item">
-            <button type="submit" class="btn btn-primary">发布</button>
+            <button type="submit" class="btn btn-primary">保存</button>
           </div>
         </div>
         <div class="card-body">

@@ -46,12 +46,8 @@
 
 
 /* accounts-page */
-.accounts-page {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
 .accounts-page .header {
   display: flex;
+  width: 100%;
   align-items: center;
 }
