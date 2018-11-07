@@ -10,12 +10,11 @@ class RegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control'})
-        self.fields['nickname'].widget.attrs.update({'class': 'form-control'})
-        self.fields['email'].widget.attrs.update({'class': 'form-control'})
-        self.fields['password1'].widget.attrs.update({'class': 'form-control'})
-        self.fields['password2'].widget.attrs.update({'class': 'form-control'})
+        for field_name in self.fields:
+            field = self.fields[field_name]
+            field.widget.attrs.update({'class': 'form-control'})
 
-class SettingsForm(forms.Form):
-    nickname = forms.CharField()
-    email = forms.EmailField()
+class SettingsForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('nickname', 'email',)

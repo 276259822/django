@@ -26,14 +26,12 @@ def settings(request):
 def settings_form(request):
     user = get_object_or_404(User, pk=request.user.pk)
     if request.method == 'POST':
-        form = SettingsForm(request.POST)
+        form = SettingsForm(request.POST, instance=user)
         if form.is_valid():
-            user.nickname = form.cleaned_data['nickname']
-            user.email = form.cleaned_data['email']
-            user.save()
+            form.save()
             return redirect('users:settings')
     else:
-        form = SettingsForm()
+        form = SettingsForm(instance=user)
     
     context = {
         'form': form

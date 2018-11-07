@@ -4,10 +4,6 @@
 <title>设置 - 我的博客</title>
 {% endblock title %}
 
-{% block link %}
-<link rel="stylesheet" href="{% static 'users/style/index.css' %}">
-{% endblock link %}
-
 {% block body %}
 <div class="users-page">
   <div class="container card accounts-page">
@@ -16,6 +12,7 @@
       <div class="media-body">
         <div><strong>{{ user.username }}</strong></div>
       </div>
+      <a href="{% url 'blog:write' %}">发布文章</a>
     </div>
   </div>
 </div>

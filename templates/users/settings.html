@@ -4,16 +4,12 @@
 <title>设置 - 我的博客</title>
 {% endblock title %}
 
-{% block link %}
-<link rel="stylesheet" href="{% static 'users/style/index.css' %}">
-{% endblock link %}
-
 {% block body %}
 <div class="users-page">
   <div class="container card settings-page">
     <div class="row">
       <div class="col-md-3 layout-left">
-        {% include "users/components/nav.html" %}
+        {% include "components/nav.html" %}
       </div>
       <div class="col-md-9 layout-right">
         <div class="right-header">

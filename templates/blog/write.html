@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>设置 - 我的博客</title>
+{% endblock title %}
+
+{% block body %}
+<div class="pt15 pb15">
+  <div class="container">
+    <div class="row card">
+      <form action="{% url 'blog:write' %}" method="POST">
+      {% csrf_token %}
+        <div class="card-header flex-list">
+          <div class="flex-item">
+            <strong>写文章</strong>
+          </div>
+          <div class="flex-content"></div>
+          <div class="flex-item">
+            <button type="submit" class="btn btn-primary">发布</button>
+          </div>
+        </div>
+        <div class="card-body">
+          {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }}
+          </div>
+          {% if field.errors %}
+          <div class="alert alert-danger errors-tips">
+            {{ field.errors }}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}
