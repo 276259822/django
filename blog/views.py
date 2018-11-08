@@ -38,3 +38,8 @@ def edit(request, article_pk):
     else:
         form = ArticleForm(instance=article)
     return render(request, 'blog/edit.html', locals())
+
+
+def detail(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    return render(request, 'blog/detail.html', locals())

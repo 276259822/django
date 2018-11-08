@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block title %}
+<title>文章详情 - 我的博客</title>
+{% endblock title %} {% block body %}
+<div class="pt15 pb15">
+  <div class="container">
+    <div class="row card">
+      <div class="card-header flex-list">
+        <div class="flex-content"></div>
+        <div class="flex-item">
+          <a href="{% url 'blog:edit' article.pk %}">编辑</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="text-center"><strong>{{ article.title }}</strong></h5>
+        <div class="text-center">
+          <span>Category：{{ article.category }} · </span>
+          <span>{{ article.created_time }} · </span>
+          <span>{{ article.author }} · </span>
+          <span>{{ article.views }}阅读</span>
+        </div>
+        <p>{{ article.body }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
