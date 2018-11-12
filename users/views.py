@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegisterForm, SettingsForm
 from .models import User
@@ -22,14 +23,14 @@ def register(request):
 
 # 设置 - 帐号信息 - 展示
 
-
+@login_required
 def settings(request):
     return render(request, 'users/settings.html')
 
 # 设置 - 帐号信息 - 编辑
 # 为解决问题 - form表单默认值
 
-
+@login_required
 def settings_form(request):
     user = get_object_or_404(User, pk=request.user.pk)
     if request.method == 'POST':
@@ -47,7 +48,7 @@ def settings_form(request):
 
 # 设置 - 帐号信息 - 展示
 
-
+@login_required
 def accounts(request):
     article_list = Article.objects.filter(author=request.user)
     return render(request, 'users/accounts.html', locals())

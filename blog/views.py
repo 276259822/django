@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from users.models import User
 from .models import Article, Category, Tag
 from .forms import ArticleForm
@@ -7,7 +8,7 @@ from .forms import ArticleForm
 def index(request):
     return render(request, 'blog/index.html')
 
-
+@login_required
 def write(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
@@ -27,7 +28,7 @@ def write(request):
         form = ArticleForm()
     return render(request, 'blog/write.html', locals())
 
-
+@login_required
 def edit(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     if request.method == 'POST':
@@ -39,7 +40,25 @@ def edit(request, article_pk):
         form = ArticleForm(instance=article)
     return render(request, 'blog/edit.html', locals())
 
-
+@login_required
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
+    article.increase_views()
     return render(request, 'blog/detail.html', locals())
+
+@login_required
+def category(request, category_pk):
+    cate = Category.objects.get(pk=category_pk)
+    article_list = Article.objects.filter(category=cate)
+    return render(request, 'users/accounts.html', locals())
+
+@login_required
+def tag(request, tag_pk):
+    tag = Tag.objects.get(pk=tag_pk)
+    article_list = Article.objects.filter(tags=tag)
+    return render(request, 'users/accounts.html', locals())
+
+@login_required
+def dates(request, year, month):
+    article_list = Article.objects.filter(created_time__year=year, created_time__month=month)
+    return render(request, 'users/accounts.html', locals())

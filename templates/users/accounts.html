@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% load staticfiles %} {% block title %}
+{% load blog_tags %}
 <title>设置 - 我的博客</title>
 {% endblock title %} {% block body %}
 <div class="users-page accounts-page">
@@ -14,20 +15,59 @@
         <a href="{% url 'blog:write' %}">发布文章</a>
       </div>
       <div class="card-body">
-        <h2>链接列表项</h2>
-        <ul class="list-group">
-          {% for article in article_list %}
-          <li class="list-group-item list-group-item-action flex-list">
-            <div class="flex-item">
-              <a href="{% url 'blog:detail' article.pk %}">{{ article.title }}</a>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">文章列表</div>
+              <ul class="list-group card-list">
+                {% for article in article_list %}
+                <li class="list-group-item list-group-item-action flex-list">
+                  <div class="flex-item">
+                    <a href="{% url 'blog:detail' article.pk %}">{{ article.title }}</a>
+                  </div>
+                  <div class="flex-content"></div>
+                  <div class="flex-item">
+                    <a href="{% url 'blog:edit' article.pk %}">编辑</a>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
             </div>
-            <div class="flex-content"></div>
-            <div class="flex-item">
-              <a href="{% url 'blog:edit' article.pk %}">编辑</a>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <div class="card-header">分类</div>
+              {% get_catagory_list as category_list %}
+              <ul class="list-group card-list">
+                {% for category in category_list %}
+                <li class="list-group-item list-group-item-action">
+                  <a href="{% url 'blog:category' category.pk %}">{{ category.name }} ({{ category.article_set.count }})</a>
+                </li>
+                {% endfor %}
+              </ul>
             </div>
-          </li>
-          {% endfor %}
-        </ul>
+            <div class="card mb-3">
+              <div class="card-header">分类</div>
+              {% get_date_list as date_list %}
+              <ul class="list-group card-list">
+                {% for date in date_list %}
+                <li class="list-group-item list-group-item-action">
+                  <a href="{% url 'blog:dates' date.year date.month %}">{{ date.year }}年{{ date.month }}月</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="card">
+                <div class="card-header">标签云</div>
+                {% get_tag_list as tag_list %}
+                <div class="card-body">
+                  {% for tag in tag_list %}
+                  <a href="{% url 'blog:tag' tag.pk %}" class="btn btn-info btn-sm" role="button">{{ tag.name }} ({{ tag.article_set.count }})</a>
+                  {% endfor %}
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -36,8 +36,14 @@ class Article(models.Model):
     collection = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
+    is_delete = models.BooleanField(default=False)
+
     def __str__(self):
         return self.title
 
     class Meta:
         ordering = ['-created_time']
+
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views',])
