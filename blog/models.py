@@ -20,6 +20,11 @@ class Tag(models.Model):
         return self.name
 
 
+class ArticleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_delete=False)
+
+
 class Article(models.Model):
     title = models.CharField(max_length=120)
     body = models.TextField()
@@ -38,6 +43,8 @@ class Article(models.Model):
 
     is_delete = models.BooleanField(default=False)
 
+    objects = ArticleManager()
+
     def __str__(self):
         return self.title
 
@@ -47,3 +54,10 @@ class Article(models.Model):
     def increase_views(self):
         self.views += 1
         self.save(update_fields=['views',])
+
+    def delete(self, using=None, soft=True, *args, **kwargs):
+        if soft:
+            self.is_delete = True
+            self.save(using=using)
+        else:
+            return super(Article, self).delete(using=using, *args, **kwargs)

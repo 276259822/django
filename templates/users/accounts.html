@@ -18,18 +18,27 @@
         <div class="row">
           <div class="col-md-8">
             <div class="card">
+              {% if list_type %}
+              <div class="card-header">
+                <a href="{% url 'users:accounts' %}">文章列表</a> - <span>{{ list_type }}</span>
+              </div>
+              {% else %}
               <div class="card-header">文章列表</div>
+              {% endif %}
               <ul class="list-group card-list">
                 {% for article in article_list %}
                 <li class="list-group-item list-group-item-action flex-list">
-                  <div class="flex-item">
+                  <div class="flex-item hide-text">
                     <a href="{% url 'blog:detail' article.pk %}">{{ article.title }}</a>
                   </div>
                   <div class="flex-content"></div>
                   <div class="flex-item">
+                    <a href="{% url 'blog:delete' article.pk %}?path={{ request.path }}">删除</a>
                     <a href="{% url 'blog:edit' article.pk %}">编辑</a>
                   </div>
                 </li>
+                {% empty %}
+                <li class="list-group-item text-center">暂无数据</li>
                 {% endfor %}
               </ul>
             </div>
@@ -43,17 +52,21 @@
                 <li class="list-group-item list-group-item-action">
                   <a href="{% url 'blog:category' category.pk %}">{{ category.name }} ({{ category.article_set.count }})</a>
                 </li>
+                {% empty %}
+                <li class="list-group-item text-center">暂无数据</li>
                 {% endfor %}
               </ul>
             </div>
             <div class="card mb-3">
-              <div class="card-header">分类</div>
+              <div class="card-header">归档</div>
               {% get_date_list as date_list %}
               <ul class="list-group card-list">
                 {% for date in date_list %}
                 <li class="list-group-item list-group-item-action">
                   <a href="{% url 'blog:dates' date.year date.month %}">{{ date.year }}年{{ date.month }}月</a>
                 </li>
+                {% empty %}
+                <li class="list-group-item text-center">暂无数据</li>
                 {% endfor %}
               </ul>
             </div>
@@ -63,6 +76,8 @@
                 <div class="card-body">
                   {% for tag in tag_list %}
                   <a href="{% url 'blog:tag' tag.pk %}" class="btn btn-info btn-sm" role="button">{{ tag.name }} ({{ tag.article_set.count }})</a>
+                  {% empty %}
+                  <div class="text-center">暂无数据</div>
                   {% endfor %}
                 </div>
               </div>

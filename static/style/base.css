@@ -39,3 +39,10 @@ html, body, #app {
 .card-list {
   margin: 0 -1px -1px;
 }
+
+.hide-text {
+  max-width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
