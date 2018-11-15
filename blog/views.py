@@ -6,7 +6,9 @@ from .forms import ArticleForm
 
 
 def index(request):
-    return render(request, 'blog/index.html')
+    article_list = Article.objects.all()
+    return render(request, 'blog/index.html', locals())
+
 
 @login_required
 def write(request):
@@ -28,6 +30,7 @@ def write(request):
         form = ArticleForm()
     return render(request, 'blog/write.html', locals())
 
+
 @login_required
 def edit(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
@@ -40,6 +43,7 @@ def edit(request, article_pk):
         form = ArticleForm(instance=article)
     return render(request, 'blog/edit.html', locals())
 
+
 @login_required
 def delete(request, article_pk):
     print(request.path)
@@ -48,11 +52,13 @@ def delete(request, article_pk):
     path = request.GET.get('path')
     return redirect(path)
 
+
 @login_required
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     article.increase_views()
     return render(request, 'blog/detail.html', locals())
+
 
 @login_required
 def category(request, category_pk):
@@ -61,6 +67,7 @@ def category(request, category_pk):
     list_type = '分类：%s' % cate
     return render(request, 'users/accounts.html', locals())
 
+
 @login_required
 def tag(request, tag_pk):
     tag = Tag.objects.get(pk=tag_pk)
@@ -68,8 +75,10 @@ def tag(request, tag_pk):
     list_type = '标签：%s' % tag
     return render(request, 'users/accounts.html', locals())
 
+
 @login_required
 def dates(request, year, month):
-    article_list = Article.objects.filter(created_time__year=year, created_time__month=month)
+    article_list = Article.objects.filter(
+        created_time__year=year, created_time__month=month)
     list_type = '归档：%s年%s月' % (year, month)
     return render(request, 'users/accounts.html', locals())

@@ -1,18 +1,27 @@
-{% extends "base.html" %}
-
-{% block title %}
+{% extends "base.html" %} {% block title %}
 <title>首页 - 我的博客</title>
-{% endblock title %}
-
-{% block body %}
+{% endblock title %} {% block body %}
 <div class="pt15 pb15">
   <div class="container">
     <div class="row card">
       <div class="card-body">
         <ul class="list-group">
-          <li class="list-group-item">First item</li>
-          <li class="list-group-item">Second item</li>
-          <li class="list-group-item">Third item</li>
+          {% for article in article_list %}
+          <li class="list-group-item">
+            <h5 class="text-center">
+              <a href="{% url 'blog:detail' article.pk %}">{{ article.title }}</a>
+            </h5>
+            <div class="text-center">
+              <span>作者：{{ article.author }}</span>
+              <span>分类：{{ article.category }}</span>
+              <span>创建时间：{{ article.created_time }}</span>
+              <span>阅读：{{ article.views }}</span>
+            </div>
+            <div>{{ article.excerpt }}</div>
+          </li>
+          {% empty %}
+          <li class="list-group-item">暂无数据</li>
+          {% endfor %}
         </ul>
       </div>
     </div>

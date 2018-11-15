@@ -53,7 +53,7 @@ class Article(models.Model):
 
     def increase_views(self):
         self.views += 1
-        self.save(update_fields=['views',])
+        self.save(update_fields=['views', ])
 
     def delete(self, using=None, soft=True, *args, **kwargs):
         if soft:
@@ -61,3 +61,8 @@ class Article(models.Model):
             self.save(using=using)
         else:
             return super(Article, self).delete(using=using, *args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        if not self.excerpt:
+            self.excerpt = self.body[:54]
+        super(Article, self).save(*args, **kwargs)
